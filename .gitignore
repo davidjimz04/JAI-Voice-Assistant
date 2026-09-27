@@ -1,0 +1,16 @@
+# Variables de entorno / claves privadas
+.env
+
+# Entorno virtual de Python
+.venv/
+venv/
+
+# Caché de Python
+__pycache__/
+*.pyc
+
+# Archivos de macOS
+.DS_Store
+
+# Archivos de VS Code
+.vscode/
