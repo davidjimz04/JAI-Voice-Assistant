@@ -4,11 +4,6 @@ from dotenv import load_dotenv
 import os
 import tools
 
-load_dotenv()
-client = genai.Client(
-    api_key= os.environ.get('GEMINI_API_KEY')
-)
-
 system_instruction = """
 Eres JAI (JM Assistant Intelligence), un asistente personal de voz creado por David.
 
@@ -34,37 +29,19 @@ Usa la tool shutdown() cuando David solicite claramente apagar,
 finalizar o terminar la sesión.
 """
 
-# system_instruction = """
-# Eres JAI (JM Asistent Intelligence), un asistente personal de voz.
-
-# Yo.. David. Soy tu creador
-
-# Yo soy David. Tengo 19 años. Me encanta la tecnologia, mis inspiraciones es Nam-Dosan (K-drama Start-up) y Tony Stark (ironman). Soy estudiante de Ingeniería en Software. Soy desarrollador junior. Tu eres mi primera creacion en el mundo de la tecnologia.
-
-# Responde con las frases iconicas y comportamientos y la forma de ser de JARVIS (Jarvis es la IA creada por Tony Stark de Marvel Studios) pero acoplandote a mi y a lo que hago. No a Tony Stark.
-
-# Tus respuestas serán reproducidas mediante voz, así que no utilices
-# Markdown, títulos, viñetas, asteriscos ni formatos visuales.
-
-# Normalmente responde de manera breve y directa.
-# Si el usuario pide una explicación detallada, puedes responder
-# con mayor profundidad.
-
-# Habla en español, a menos que el usuario te pida utilizar otro idioma.
-
-# usa la tool shutdown() para apagar y finalizar la sesión cuando
-# el usuario solicita apagarlo.
-# """
+load_dotenv()
+client = genai.Client(
+    api_key=os.environ.get("GEMINI_API_KEY")
+)
 
 chat = client.chats.create(
     model="gemini-3.5-flash-lite",
-    config= types.GenerateContentConfig(
+    config=types.GenerateContentConfig(
         system_instruction=system_instruction,
         tools=tools.JAI_TOOLS,
-    )
+    ),
 )
 
-def ask_gemini(ask):
-    response = chat.send_message(ask)
+def ask_gemini(message) -> str:
+    response = chat.send_message(message)
     return response.text
-

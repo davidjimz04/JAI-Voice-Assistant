@@ -1,8 +1,8 @@
 from unidecode import unidecode
-from ia import ask_gemini 
 import tools
 from voice.speaker import speak
 from voice.listener import listen
+from IA.gemini import ask_gemini
 
 starting = ask_gemini(
     "Despierta JAI. siempre saluda. di la hora y el clima"
@@ -11,7 +11,7 @@ print(starting)
 speak(starting)
 
 def app():
-    while tools.jarvis_active:
+    while tools.system_tools.jarvis_active:
 
         input_user = listen()
 
