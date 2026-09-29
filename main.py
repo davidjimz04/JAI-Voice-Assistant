@@ -21,8 +21,6 @@ def app():
         input_user = input_user.lower().strip()
         input_user = unidecode(input_user)
 
-        # print("TU: ", input_user)
-    
         answer = ask_gemini(input_user)
         print(answer)
         speak(answer)
