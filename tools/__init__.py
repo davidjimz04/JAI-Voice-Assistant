@@ -1,5 +1,5 @@
 from tools import web_tools, system_tools, weather_tools
-from memory.memory import save_memory
+from memory.memory import save_memory, get_memory
 
 JAI_TOOLS = [
     web_tools.open_claude,
@@ -9,6 +9,11 @@ JAI_TOOLS = [
     system_tools.get_date,
     system_tools.get_hour,
     system_tools.shutdown,
+    system_tools.open_app,
+    system_tools.info_disk,
+    system_tools.info_ram,
+    system_tools.info_battery,
     weather_tools.get_weather,
     save_memory,
+    get_memory
 ]

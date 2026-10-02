@@ -1,4 +1,6 @@
 from datetime import datetime, date
+import subprocess
+import psutil
 
 jarvis_active = True
 
@@ -19,3 +21,57 @@ def get_date() -> str:
 
     today = date.today()
     return today.strftime('%d/%m/%Y')
+
+def open_app(name_app:str) -> str:
+    try:
+        subprocess.run(["open", "-a", name_app], check=True)
+        return f"La app {name_app} se ha abierto"
+    except subprocess.CalledProcessError:
+        return "No se encontro es app."
+
+
+# INFORMACION DEL EQUIPO
+
+def info_battery() -> str:
+    """
+    Esta funcion informa sobre el porciento de la bateria del equipo del usuario 
+
+    Especificaciones:
+        - 80% - 100% (Bateria perfecta)
+        - 50% - 79% (Bateria buena)
+        - 0% - 49% (Bateria mala, es mejor enchufar el equipo)
+    """
+    battery = psutil.sensors_battery()
+    porcentage = battery.percent
+
+    return f"{porcentage}%"
+
+def info_ram() -> str:
+    """
+    Esta funcion es para informar sobre la memoria ram de la maquina del usuario
+
+    Especificaciones:
+        - Especifica la ram total
+        - Especifica la ram libre 
+    """
+    ram = psutil.virtual_memory()
+    ram_total = ram.total / (1024 ** 3)
+    ram_free = ram.available / (1024 ** 3)
+
+    return f"RAM total: {ram_total:.1f} GB, RAM libre: {ram_free:.1f} GB" 
+
+def info_disk() -> str:
+    """
+    Esta funcion informa sobre la el disco duro del equipo del usuario
+
+    Especificaciones: 
+        - Especifica el total del almacenamiento del disco 
+        - Especifica el libre del almacenamiento del disco 
+    """
+
+    disk = psutil.disk_usage("/")
+    disk_total = disk.total / (1024 ** 3)
+    disk_used = disk.used / (1024 ** 3)
+    disk_free = disk.free / (1024 ** 3)
+
+    return f"Almacenamiento de disco total: {disk_total:.1f}GB, Almacenamiento de disco usado: {disk_used:.1f}GB, Almacenamiento de disco libre: {disk_free:.1f}GB"
