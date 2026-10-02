@@ -14,7 +14,7 @@ def listen() -> str:
         text = recognizer.recognize_google(audio, language="es-MX")
         return text
     except sr.exceptions.UnknownValueError:
-        speak ("Lo siento señor. No logré comprender lo que quiso decir")
+        speak ("No logre comprender jefe.")
         return None
     except sr.RequestError:
         speak("Lo siento señor. No hay conexión con el servicio de reconocimiento")

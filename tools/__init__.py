@@ -6,6 +6,8 @@ JAI_TOOLS = [
     web_tools.open_chatgpt,
     web_tools.open_youtube,
     web_tools.open_hybridge,
+    web_tools.search_youtube,
+    web_tools.search_google,
     system_tools.get_date,
     system_tools.get_hour,
     system_tools.shutdown,
