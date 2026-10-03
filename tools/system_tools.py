@@ -75,3 +75,32 @@ def info_disk() -> str:
     disk_free = disk.free / (1024 ** 3)
 
     return f"Almacenamiento de disco total: {disk_total:.1f}GB, Almacenamiento de disco usado: {disk_used:.1f}GB, Almacenamiento de disco libre: {disk_free:.1f}GB"
+
+def volume(level:int) -> str:
+    try:
+        level = max(0, min(100, level))
+        script = f'set volume output volume {level}'
+        subprocess.run(["osascript", "-e", script], check=True)
+        return f"El volumen esta ahora al {level}%"
+    except subprocess.CalledProcessError:
+        return "No se pudo bajar el volumen."
+
+# def mute_mac(mute: bool=True) -> str:
+#     """
+#     Silencia o activa el sonido del equipo.
+
+#     Args:
+#         mute: True para silenciar el equipo.
+#               False para activar nuevamente el sonido.
+
+#     Returns:
+#         Mensaje indicando el resultado de la acción.
+#     """
+
+#     try:
+#         state = "TRUE" if mute else "FALSE"
+#         script = f"set volume output muted {state}"
+#         subprocess.run(["osascript", "-e", script], check=True)
+#         return "El equpo se ha silenciado" if mute else "Sonido activado en el equipo"
+#     except subprocess.CalledProcessError:
+#         return "No se pudo silenciar el equipo."

@@ -15,6 +15,7 @@ JAI_TOOLS = [
     system_tools.info_disk,
     system_tools.info_ram,
     system_tools.info_battery,
+    system_tools.volume,
     weather_tools.get_weather,
     save_memory,
     get_memory
